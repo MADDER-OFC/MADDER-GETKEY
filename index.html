@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MADDER OFC</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:Arial,sans-serif;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:radial-gradient(circle at top,#25254b,#0b0b16 45%,#030305);
+color:white;
+overflow:hidden;
+}
+
+.card{
+width:92%;
+max-width:430px;
+padding:28px 20px;
+border:1px solid #ffffff20;
+border-radius:26px;
+background:#ffffff0b;
+backdrop-filter:blur(18px);
+box-shadow:0 0 50px #000,inset 0 0 25px #ffffff05;
+text-align:center;
+}
+
+.logo{
+font-size:48px;
+margin-bottom:5px;
+filter:drop-shadow(0 0 15px #ffd700);
+}
+
+h1{
+font-size:32px;
+letter-spacing:3px;
+background:linear-gradient(90deg,#fff,#ffd700,#fff);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.sub{
+font-size:10px;
+letter-spacing:4px;
+opacity:.55;
+margin-bottom:25px;
+}
+
+button{
+width:100%;
+padding:14px;
+border:0;
+border-radius:13px;
+font-weight:bold;
+font-size:14px;
+cursor:pointer;
+background:linear-gradient(90deg,#ffd700,#fff2a0,#ffd700);
+color:#111;
+box-shadow:0 0 18px #ffd70030;
+}
+
+button:active{transform:scale(.97)}
+
+.step{
+margin:15px 0;
+padding:18px;
+border-radius:19px;
+background:#ffffff08;
+border:1px solid #ffffff15;
+}
+
+.step h2{
+font-size:14px;
+margin-bottom:12px;
+}
+
+.status{
+margin-top:10px;
+font-size:12px;
+min-height:20px;
+line-height:20px;
+}
+
+.warning{
+color:#ff5252;
+font-weight:bold;
+}
+
+.cooldown{color:#ffd700}
+
+.completed{
+color:#00ff9d;
+font-weight:bold;
+}
+
+#steps,#claim{display:none}
+
+#claimBtn{
+display:none;
+margin-top:15px;
+}
+
+.key{
+margin:20px 0;
+padding:16px;
+border-radius:13px;
+background:#00000080;
+border:1px solid #ffd70055;
+font-size:14px;
+word-break:break-all;
+color:#ffd700;
+}
+
+.copy{
+background:#ffffff12;
+color:white;
+border:1px solid #ffffff20;
+box-shadow:none;
+}
+
+.newkey{margin-top:12px}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<!-- HOME -->
+<div id="home">
+
+<div class="logo">👑</div>
+
+<h1>MADDER OFC</h1>
+
+<div class="sub">PREMIUM KEY SYSTEM</div>
+
+<button onclick="start()">
+👑 GET FREE KEY 🔑
+</button>
+
+</div>
+
+
+<!-- STEPS -->
+<div id="steps">
+
+<h1>MADDER OFC</h1>
+
+<div class="sub">COMPLETE STEPS</div>
+
+
+<!-- STEP 1 -->
+<div class="step">
+
+<h2>STEP 1 — SUBSCRIBE CHANNEL 👽</h2>
+
+<button id="ytBtn" onclick="goYT()">
+GO ▶️
+</button>
+
+<div id="s1" class="status">
+⏳ Waiting...
+</div>
+
+</div>
+
+
+<!-- STEP 2 -->
+<div class="step">
+
+<h2>STEP 2 — COMPLETE SHORTEN 🔗</h2>
+
+<button onclick="goShorten()">
+GO 🔗
+</button>
+
+<div id="s2" class="status">
+⏳ Waiting...
+</div>
+
+</div>
+
+
+<button id="claimBtn" onclick="claim()">
+👑 CLAIM FREE KEY 🔑
+</button>
+
+</div>
+
+
+<!-- CLAIM -->
+<div id="claim">
+
+<div class="logo">🎉</div>
+
+<h1>KEY GENERATED</h1>
+
+<div class="sub">MADDER OFC PREMIUM</div>
+
+<div class="key" id="key"></div>
+
+<button class="copy" onclick="copyKey()">
+📋 COPY KEY
+</button>
+
+<button class="newkey" onclick="resetSystem()">
+🔄 GET NEW KEY
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   LOCAL STORAGE
+========================= */
+
+const PAGE_KEY = "madder_page";
+const STEP1_KEY = "madder_step1";
+const STEP2_KEY = "madder_step2";
+const START_KEY = "madder_step2_start";
+const GENERATED_KEY = "madder_key_generated";
+const KEY_KEY = "madder_key";
+
+let timer = null;
+
+
+/* =========================
+   ELEMENT
+========================= */
+
+function $(id){
+return document.getElementById(id);
+}
+
+
+/* =========================
+   SHOW PAGE
+========================= */
+
+function show(id){
+
+$("home").style.display="none";
+$("steps").style.display="none";
+$("claim").style.display="none";
+
+$(id).style.display="block";
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+function start(){
+
+localStorage.setItem(PAGE_KEY,"steps");
+
+show("steps");
+
+restoreSteps();
+
+}
+
+
+/* =========================
+   STEP 1
+========================= */
+
+function goYT(){
+
+window.open(
+"https://youtube.com/@madder-ofc?si=jRovNNb085F4KGO1",
+"_blank"
+);
+
+
+/*
+Step 1 manually marked completed
+after clicking GO.
+*/
+
+localStorage.setItem(
+STEP1_KEY,
+"done"
+);
+
+$("s1").className="status completed";
+
+$("s1").innerHTML=
+"✅ STEP 1 COMPLETED";
+
+checkSteps();
+
+}
+
+
+/* =========================
+   STEP 2
+========================= */
+
+function goShorten(){
+
+/*
+Agar already timer chal raha hai
+to dobara reset nahi hoga.
+*/
+
+if(!localStorage.getItem(START_KEY)){
+
+localStorage.setItem(
+START_KEY,
+Date.now().toString()
+);
+
+}
+
+localStorage.setItem(
+PAGE_KEY,
+"steps"
+);
+
+
+clearInterval(timer);
+
+timer=setInterval(
+updateTimer,
+500
+);
+
+updateTimer();
+
+
+/*
+VPLINK NEW TAB MEIN OPEN
+HOGA.
+*/
+
+window.open(
+"https://vplink.in/sZgs",
+"_blank"
+);
+
+}
+
+
+/* =========================
+   TIMER
+========================= */
+
+function updateTimer(){
+
+const saved=
+localStorage.getItem(START_KEY);
+
+if(!saved)return;
+
+const elapsed=
+Math.floor(
+(Date.now()-Number(saved))/1000
+);
+
+
+/*
+BEFORE 15 SEC
+*/
+
+if(elapsed<15){
+
+$("s2").className=
+"status cooldown";
+
+$("s2").innerHTML=
+"⏳ Wait "+
+(20-elapsed)+
+"s...";
+
+return;
+
+}
+
+
+/*
+15-19 SEC
+*/
+
+if(elapsed<20){
+
+$("s2").className=
+"status cooldown";
+
+$("s2").innerHTML=
+"⏳ Almost done... "+
+(20-elapsed)+
+"s";
+
+return;
+
+}
+
+
+/*
+20 SEC COMPLETE
+*/
+
+clearInterval(timer);
+
+completeStep2();
+
+}
+
+
+/* =========================
+   BYPASS WARNING
+========================= */
+
+function showBypass(){
+
+$("s2").className=
+"status warning";
+
+$("s2").innerHTML=
+"⚠️ BYPASS DETECTED 🗿<br>"+
+"<small>YOU ARE VERY FAST COMING 🙂</small>";
+
+}
+
+
+/* =========================
+   STEP 2 COMPLETE
+========================= */
+
+function completeStep2(){
+
+localStorage.setItem(
+STEP2_KEY,
+"done"
+);
+
+$("s2").className=
+"status completed";
+
+$("s2").innerHTML=
+"✅ STEP 2 COMPLETED";
+
+checkSteps();
+
+}
+
+
+/* =========================
+   CHECK BOTH STEPS
+========================= */
+
+function checkSteps(){
+
+const step1=
+localStorage.getItem(STEP1_KEY)==="done";
+
+const step2=
+localStorage.getItem(STEP2_KEY)==="done";
+
+
+if(step1){
+
+$("s1").className=
+"status completed";
+
+$("s1").innerHTML=
+"✅ STEP 1 COMPLETED";
+
+}
+
+
+if(step2){
+
+$("s2").className=
+"status completed";
+
+$("s2").innerHTML=
+"✅ STEP 2 COMPLETED";
+
+$("claimBtn").style.display=
+"block";
+
+}
+
+}
+
+
+/* =========================
+   RESTORE STEPS
+========================= */
+
+function restoreSteps(){
+
+const step1=
+localStorage.getItem(STEP1_KEY)==="done";
+
+const step2=
+localStorage.getItem(STEP2_KEY)==="done";
+
+const saved=
+localStorage.getItem(START_KEY);
+
+
+if(step1){
+
+$("s1").className=
+"status completed";
+
+$("s1").innerHTML=
+"✅ STEP 1 COMPLETED";
+
+}
+
+
+if(step2){
+
+$("s2").className=
+"status completed";
+
+$("s2").innerHTML=
+"✅ STEP 2 COMPLETED";
+
+$("claimBtn").style.display=
+"block";
+
+return;
+
+}
+
+
+if(saved){
+
+const elapsed=
+Math.floor(
+(Date.now()-Number(saved))/1000
+);
+
+
+/*
+RETURN BEFORE 15 SEC
+*/
+
+if(elapsed<15){
+
+showBypass();
+
+}
+
+/*
+15-19 SEC
+*/
+
+else if(elapsed<20){
+
+updateTimer();
+
+clearInterval(timer);
+
+timer=setInterval(
+updateTimer,
+500
+);
+
+}
+
+/*
+20+ SEC
+*/
+
+else{
+
+completeStep2();
+
+}
+
+}
+
+
+checkSteps();
+
+}
+
+
+/* =========================
+   CLAIM
+========================= */
+
+function claim(){
+
+if(
+localStorage.getItem(STEP1_KEY)!=="done" ||
+localStorage.getItem(STEP2_KEY)!=="done"
+){
+
+return;
+
+}
+
+
+let savedKey=
+localStorage.getItem(KEY_KEY);
+
+
+if(!savedKey){
+
+const random=
+Math.random()
+.toString(36)
+.substring(2,10)
+.toUpperCase();
+
+savedKey=
+"MADDER-FREE-"+
+random+
+"-4HR";
+
+localStorage.setItem(
+KEY_KEY,
+savedKey
+);
+
+localStorage.setItem(
+GENERATED_KEY,
+"true"
+);
+
+}
+
+
+localStorage.setItem(
+PAGE_KEY,
+"claim"
+);
+
+$("key").innerText=
+savedKey;
+
+show("claim");
+
+}
+
+
+/* =========================
+   COPY KEY
+========================= */
+
+async function copyKey(){
+
+const key=
+localStorage.getItem(KEY_KEY);
+
+if(!key)return;
+
+try{
+
+await navigator.clipboard.writeText(key);
+
+$("key").innerText=
+"✅ KEY COPIED!";
+
+setTimeout(()=>{
+
+$("key").innerText=key;
+
+},1200);
+
+}catch(e){
+
+alert("KEY: "+key);
+
+}
+
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetSystem(){
+
+localStorage.removeItem(PAGE_KEY);
+localStorage.removeItem(STEP1_KEY);
+localStorage.removeItem(STEP2_KEY);
+localStorage.removeItem(START_KEY);
+localStorage.removeItem(GENERATED_KEY);
+localStorage.removeItem(KEY_KEY);
+
+clearInterval(timer);
+
+$("claimBtn").style.display=
+"none";
+
+$("s1").className=
+"status";
+
+$("s1").innerHTML=
+"⏳ Waiting...";
+
+$("s2").className=
+"status";
+
+$("s2").innerHTML=
+"⏳ Waiting...";
+
+show("home");
+
+}
+
+
+/* =========================
+   TAB RETURN
+========================= */
+
+document.addEventListener(
+"visibilitychange",
+()=>{
+
+if(
+document.visibilityState==="visible"
+){
+
+const page=
+localStorage.getItem(PAGE_KEY);
+
+if(page==="steps"){
+
+restoreSteps();
+
+}
+
+}
+
+});
+
+
+/* =========================
+   PAGE LOAD
+========================= */
+
+function restorePage(){
+
+const page=
+localStorage.getItem(PAGE_KEY);
+
+const generated=
+localStorage.getItem(GENERATED_KEY);
+
+const savedKey=
+localStorage.getItem(KEY_KEY);
+
+
+/*
+KEY ALREADY GENERATED
+*/
+
+if(
+page==="claim" &&
+generated==="true" &&
+savedKey
+){
+
+$("key").innerText=
+savedKey;
+
+show("claim");
+
+return;
+
+}
+
+
+/*
+USER LEFT ON STEPS
+*/
+
+if(page==="steps"){
+
+show("steps");
+
+restoreSteps();
+
+return;
+
+}
+
+
+/*
+FIRST VISIT
+*/
+
+show("home");
+
+}
+
+
+restorePage();
+
+</script>
+
+</body>
+</html>
