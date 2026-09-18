@@ -6,7 +6,11 @@
 <title>MADDER OFC</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+box-sizing:border-box;
+margin:0;
+padding:0
+}
 
 body{
 font-family:Arial,sans-serif;
@@ -29,6 +33,8 @@ background:#ffffff0b;
 backdrop-filter:blur(18px);
 box-shadow:0 0 50px #000,inset 0 0 25px #ffffff05;
 text-align:center;
+position:relative;
+z-index:2;
 }
 
 .logo{
@@ -65,7 +71,9 @@ color:#111;
 box-shadow:0 0 18px #ffd70030;
 }
 
-button:active{transform:scale(.97)}
+button:active{
+transform:scale(.97)
+}
 
 .step{
 margin:15px 0;
@@ -88,18 +96,24 @@ line-height:20px;
 }
 
 .warning{
-color:#ff5252;
+color:#ff3030;
 font-weight:bold;
 }
 
-.cooldown{color:#ffd700}
+.cooldown{
+color:#ffd700
+}
 
 .completed{
 color:#00ff9d;
 font-weight:bold;
 }
 
-#steps,#claim{display:none}
+#steps,
+#claim,
+#bypass{
+display:none
+}
 
 #claimBtn{
 display:none;
@@ -124,7 +138,198 @@ border:1px solid #ffffff20;
 box-shadow:none;
 }
 
-.newkey{margin-top:12px}
+.newkey{
+margin-top:12px
+}
+
+
+/* =========================
+   BYPASS PAGE
+========================= */
+
+.bypass-page{
+position:relative;
+min-height:500px;
+overflow:hidden;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:flex-start;
+}
+
+.bypass-bg{
+position:absolute;
+inset:-100px;
+z-index:-1;
+pointer-events:none;
+opacity:.12;
+
+background-image:
+repeating-linear-gradient(
+-25deg,
+transparent 0px,
+transparent 80px,
+#ff2020 81px,
+#ff2020 84px
+);
+}
+
+.bypass-watermark{
+position:absolute;
+inset:-20px;
+z-index:-1;
+pointer-events:none;
+
+display:flex;
+flex-wrap:wrap;
+align-content:center;
+justify-content:center;
+gap:25px;
+
+font-size:22px;
+font-weight:900;
+letter-spacing:3px;
+color:#ff2020;
+opacity:.045;
+transform:rotate(-18deg);
+}
+
+.bypass-img{
+width:135px;
+height:135px;
+object-fit:contain;
+margin:0 auto 8px;
+
+filter:
+drop-shadow(0 0 8px #ff0000)
+drop-shadow(0 0 22px #ff0000);
+
+animation:bypassPulse 1.2s infinite alternate;
+}
+
+@keyframes bypassPulse{
+from{
+transform:scale(.96);
+filter:
+drop-shadow(0 0 5px #ff0000)
+drop-shadow(0 0 12px #ff0000);
+}
+to{
+transform:scale(1.03);
+filter:
+drop-shadow(0 0 12px #ff0000)
+drop-shadow(0 0 30px #ff0000);
+}
+}
+
+.bypass-title{
+font-size:27px;
+font-weight:1000;
+letter-spacing:2px;
+color:#ff2424;
+text-shadow:
+0 0 5px #ff0000,
+0 0 15px #ff0000;
+margin-bottom:8px;
+}
+
+.bypass-title2{
+font-size:18px;
+font-weight:900;
+color:#ff3030;
+margin-bottom:20px;
+}
+
+.warning-area{
+width:100%;
+padding:13px 8px;
+margin-bottom:15px;
+
+border-top:1px solid #ff000055;
+border-bottom:1px solid #ff000055;
+
+color:#ff3030;
+font-size:13px;
+font-weight:bold;
+letter-spacing:2px;
+}
+
+.reason-box{
+width:100%;
+padding:17px;
+border-radius:15px;
+
+background:#ff00000d;
+border:1px solid #ff303055;
+
+box-shadow:
+inset 0 0 20px #ff00000a,
+0 0 20px #ff000010;
+
+margin-bottom:15px;
+}
+
+.reason-head{
+color:#ff3030;
+font-size:13px;
+font-weight:900;
+letter-spacing:2px;
+margin-bottom:8px;
+}
+
+.reason-text{
+font-size:12px;
+line-height:19px;
+color:#ff8585;
+}
+
+.retry{
+background:linear-gradient(
+90deg,
+#ff2020,
+#ff6b6b,
+#ff2020
+);
+
+color:white;
+
+box-shadow:
+0 0 20px #ff000050,
+0 0 40px #ff000015;
+
+border:1px solid #ff7777;
+}
+
+
+/* =========================
+   EXPIRED PAGE
+========================= */
+
+.expired-title{
+color:#ff3030;
+text-shadow:0 0 15px #ff0000;
+}
+
+.expired-box{
+margin:20px 0;
+padding:18px;
+border-radius:15px;
+background:#ff00000b;
+border:1px solid #ff303055;
+color:#ff4040;
+font-weight:bold;
+}
+
+.regenerate{
+background:linear-gradient(
+90deg,
+#ff3030,
+#ff8888,
+#ff3030
+);
+
+color:white;
+}
 </style>
 </head>
 
@@ -132,7 +337,10 @@ box-shadow:none;
 
 <div class="card">
 
-<!-- HOME -->
+<!-- =========================
+     HOME
+========================= -->
+
 <div id="home">
 
 <div class="logo">👑</div>
@@ -148,7 +356,10 @@ box-shadow:none;
 </div>
 
 
-<!-- STEPS -->
+<!-- =========================
+     STEPS
+========================= -->
+
 <div id="steps">
 
 <h1>MADDER OFC</h1>
@@ -157,6 +368,7 @@ box-shadow:none;
 
 
 <!-- STEP 1 -->
+
 <div class="step">
 
 <h2>STEP 1 — SUBSCRIBE CHANNEL 👽</h2>
@@ -173,6 +385,7 @@ GO ▶️
 
 
 <!-- STEP 2 -->
+
 <div class="step">
 
 <h2>STEP 2 — COMPLETE SHORTEN 🔗</h2>
@@ -195,26 +408,117 @@ GO 🔗
 </div>
 
 
-<!-- CLAIM -->
+<!-- =========================
+     BYPASS PAGE
+========================= -->
+
+<div id="bypass" class="bypass-page">
+
+<div class="bypass-bg"></div>
+
+<div class="bypass-watermark">
+⚠️ BYPASS DETECTED 🗿
+⚠️ BYPASS DETECTED 🗿
+⚠️ BYPASS DETECTED 🗿
+⚠️ BYPASS DETECTED 🗿
+⚠️ BYPASS DETECTED 🗿
+⚠️ BYPASS DETECTED 🗿
+⚠️ BYPASS DETECTED 🗿
+⚠️ BYPASS DETECTED 🗿
+⚠️ BYPASS DETECTED 🗿
+⚠️ BYPASS DETECTED 🗿
+⚠️ BYPASS DETECTED 🗿
+⚠️ BYPASS DETECTED 🗿
+</div>
+
+<img
+src="bypass.png"
+class="bypass-img"
+alt="Bypass Warning"
+>
+
+<div class="bypass-title">
+BYPASS DETECTED 🗿
+</div>
+
+<div class="bypass-title2">
+⚠️ WARNING ⚠️
+</div>
+
+<div class="warning-area">
+⚠️ ⚠️ ⚠️ BYPASS DETECTED ⚠️ ⚠️ ⚠️
+</div>
+
+<div class="reason-box">
+
+<div class="reason-head">
+REASON:
+</div>
+
+<div class="reason-text">
+YOUR ARE VERY FAST OR USING BYPASS DETECTED 🗿
+</div>
+
+</div>
+
+<button class="retry" onclick="retryBypass()">
+🔄 RETRY
+</button>
+
+</div>
+
+
+<!-- =========================
+     CLAIM / EXPIRED
+========================= -->
+
 <div id="claim">
 
-<div class="logo">🎉</div>
+<div class="logo" id="claimLogo">🎉</div>
 
-<h1>KEY GENERATED</h1>
+<h1 id="claimTitle">KEY GENERATED</h1>
 
-<div class="sub">MADDER OFC PREMIUM</div>
+<div class="sub" id="claimSub">
+MADDER OFC PREMIUM
+</div>
 
 <div class="key" id="key"></div>
 
-<button class="copy" onclick="copyKey()">
+<button id="copyBtn" class="copy" onclick="copyKey()">
 📋 COPY KEY
 </button>
 
-<button class="newkey" onclick="resetSystem()">
+<button
+id="regenerateBtn"
+class="newkey regenerate"
+onclick="regenerateKey()"
+style="display:none"
+>
+🔄 REGENERATE KEY
+</button>
+
+<button
+id="normalNewKey"
+class="newkey"
+onclick="resetSystem()"
+>
 🔄 GET NEW KEY
 </button>
 
 </div>
+
+
+<!-- =========================
+     AUDIO
+========================= -->
+
+<audio id="homeMusic" loop preload="auto">
+<source src="home.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="bypassMusic" loop preload="auto">
+<source src="bypass.mp3" type="audio/mpeg">
+</audio>
 
 </div>
 
@@ -232,6 +536,7 @@ const START_KEY = "madder_step2_start";
 const GENERATED_KEY = "madder_key_generated";
 const KEY_KEY = "madder_key";
 
+
 let timer = null;
 
 
@@ -245,6 +550,43 @@ return document.getElementById(id);
 
 
 /* =========================
+   MUSIC
+========================= */
+
+function stopMusic(){
+
+$("homeMusic").pause();
+$("bypassMusic").pause();
+
+$("homeMusic").currentTime = 0;
+$("bypassMusic").currentTime = 0;
+
+}
+
+
+function playHomeMusic(){
+
+$("bypassMusic").pause();
+
+$("homeMusic")
+.play()
+.catch(()=>{});
+
+}
+
+
+function playBypassMusic(){
+
+$("homeMusic").pause();
+
+$("bypassMusic")
+.play()
+.catch(()=>{});
+
+}
+
+
+/* =========================
    SHOW PAGE
 ========================= */
 
@@ -253,6 +595,7 @@ function show(id){
 $("home").style.display="none";
 $("steps").style.display="none";
 $("claim").style.display="none";
+$("bypass").style.display="none";
 
 $(id).style.display="block";
 
@@ -265,7 +608,13 @@ $(id).style.display="block";
 
 function start(){
 
-localStorage.setItem(PAGE_KEY,"steps");
+stopMusic();
+playHomeMusic();
+
+localStorage.setItem(
+PAGE_KEY,
+"steps"
+);
 
 show("steps");
 
@@ -287,8 +636,7 @@ window.open(
 
 
 /*
-Step 1 manually marked completed
-after clicking GO.
+Step 1 manually completed
 */
 
 localStorage.setItem(
@@ -313,8 +661,7 @@ checkSteps();
 function goShorten(){
 
 /*
-Agar already timer chal raha hai
-to dobara reset nahi hoga.
+Timer sirf pehli baar start hoga.
 */
 
 if(!localStorage.getItem(START_KEY)){
@@ -331,7 +678,6 @@ PAGE_KEY,
 "steps"
 );
 
-
 clearInterval(timer);
 
 timer=setInterval(
@@ -343,8 +689,7 @@ updateTimer();
 
 
 /*
-VPLINK NEW TAB MEIN OPEN
-HOGA.
+SHORTEN OPEN
 */
 
 window.open(
@@ -383,7 +728,7 @@ $("s2").className=
 
 $("s2").innerHTML=
 "⏳ Wait "+
-(20-elapsed)+
+(30-elapsed)+
 "s...";
 
 return;
@@ -392,17 +737,17 @@ return;
 
 
 /*
-15-19 SEC
+15-29 SEC
 */
 
-if(elapsed<20){
+if(elapsed<30){
 
 $("s2").className=
 "status cooldown";
 
 $("s2").innerHTML=
 "⏳ Almost done... "+
-(20-elapsed)+
+(30-elapsed)+
 "s";
 
 return;
@@ -411,7 +756,7 @@ return;
 
 
 /*
-20 SEC COMPLETE
+30 SEC COMPLETE
 */
 
 clearInterval(timer);
@@ -427,12 +772,13 @@ completeStep2();
 
 function showBypass(){
 
-$("s2").className=
-"status warning";
+clearInterval(timer);
 
-$("s2").innerHTML=
-"⚠️ BYPASS DETECTED 🗿<br>"+
-"<small>YOU ARE VERY FAST COMING 🙂</small>";
+stopMusic();
+
+playBypassMusic();
+
+show("bypass");
 
 }
 
@@ -551,34 +897,20 @@ Math.floor(
 
 
 /*
-RETURN BEFORE 15 SEC
+30 SEC SE PEHLE RETURN
 */
 
-if(elapsed<15){
+if(elapsed<30){
 
 showBypass();
 
-}
-
-/*
-15-19 SEC
-*/
-
-else if(elapsed<20){
-
-updateTimer();
-
-clearInterval(timer);
-
-timer=setInterval(
-updateTimer,
-500
-);
+return;
 
 }
 
+
 /*
-20+ SEC
+30 SEC COMPLETE
 */
 
 else{
@@ -649,6 +981,23 @@ PAGE_KEY,
 $("key").innerText=
 savedKey;
 
+$("claimTitle").innerText=
+"KEY GENERATED";
+
+$("claimTitle").className="";
+
+$("claimSub").innerText=
+"MADDER OFC PREMIUM";
+
+$("copyBtn").style.display=
+"block";
+
+$("normalNewKey").style.display=
+"block";
+
+$("regenerateBtn").style.display=
+"none";
+
 show("claim");
 
 }
@@ -688,7 +1037,127 @@ alert("KEY: "+key);
 
 
 /* =========================
-   RESET
+   EXPIRE KEY
+========================= */
+
+function expireKey(){
+
+clearInterval(timer);
+
+stopMusic();
+
+localStorage.setItem(
+PAGE_KEY,
+"expired"
+);
+
+$("claimLogo").innerText=
+"⚠️";
+
+$("claimTitle").innerText=
+"KEY EXPIRED";
+
+$("claimTitle").className=
+"expired-title";
+
+$("claimSub").innerText=
+"MADDER OFC KEY SYSTEM";
+
+$("key").innerText=
+"⚠️ THIS KEY SESSION HAS EXPIRED";
+
+$("copyBtn").style.display=
+"none";
+
+$("normalNewKey").style.display=
+"none";
+
+$("regenerateBtn").style.display=
+"block";
+
+show("claim");
+
+}
+
+
+/* =========================
+   REGENERATE
+========================= */
+
+function regenerateKey(){
+
+localStorage.removeItem(PAGE_KEY);
+localStorage.removeItem(STEP1_KEY);
+localStorage.removeItem(STEP2_KEY);
+localStorage.removeItem(START_KEY);
+localStorage.removeItem(GENERATED_KEY);
+localStorage.removeItem(KEY_KEY);
+
+clearInterval(timer);
+
+$("claimBtn").style.display=
+"none";
+
+$("s1").className=
+"status";
+
+$("s1").innerHTML=
+"⏳ Waiting...";
+
+$("s2").className=
+"status";
+
+$("s2").innerHTML=
+"⏳ Waiting...";
+
+show("home");
+
+playHomeMusic();
+
+}
+
+
+/* =========================
+   BYPASS RETRY
+========================= */
+
+function retryBypass(){
+
+localStorage.removeItem(PAGE_KEY);
+localStorage.removeItem(STEP1_KEY);
+localStorage.removeItem(STEP2_KEY);
+localStorage.removeItem(START_KEY);
+localStorage.removeItem(GENERATED_KEY);
+localStorage.removeItem(KEY_KEY);
+
+clearInterval(timer);
+
+$("claimBtn").style.display=
+"none";
+
+$("s1").className=
+"status";
+
+$("s1").innerHTML=
+"⏳ Waiting...";
+
+$("s2").className=
+"status";
+
+$("s2").innerHTML=
+"⏳ Waiting...";
+
+stopMusic();
+
+show("home");
+
+playHomeMusic();
+
+}
+
+
+/* =========================
+   NORMAL RESET
 ========================= */
 
 function resetSystem(){
@@ -717,7 +1186,11 @@ $("s2").className=
 $("s2").innerHTML=
 "⏳ Waiting...";
 
+stopMusic();
+
 show("home");
+
+playHomeMusic();
 
 }
 
@@ -765,7 +1238,11 @@ localStorage.getItem(KEY_KEY);
 
 
 /*
-KEY ALREADY GENERATED
+IMPORTANT:
+
+Agar key pehle generate ho chuki hai
+aur user page reload/back karke
+wapas aaya hai -> EXPIRED.
 */
 
 if(
@@ -774,10 +1251,20 @@ generated==="true" &&
 savedKey
 ){
 
-$("key").innerText=
-savedKey;
+expireKey();
 
-show("claim");
+return;
+
+}
+
+
+/*
+EXPIRED PAGE
+*/
+
+if(page==="expired"){
+
+expireKey();
 
 return;
 
@@ -806,7 +1293,6 @@ FIRST VISIT
 show("home");
 
 }
-
 
 restorePage();
 
